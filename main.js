@@ -1,19 +1,19 @@
-// so`rovlar bilan ishlash
-// so`rovni ichki strukturasi
+// So`rovlar bilan ishlash
+// So`rovni ichki strukturasi
 // METHOD, BODY, HEADERS
 
-let n = document.querySelector('tbody')
+let tb = document.querySelector('tbody')
 let frm = document.querySelector('#addform')
 
 function sendQuery(){
-    fetch('https://cybers.uz/api/dars')
-    .then(res => res.json(res).then(data => render(data))
-    )
+    fetch('https://cyberss.uz/api/dars')
+    .then(res => res.json(res)).then(data => render(data))
+}
     sendQuery()
 
     function render(users) {
         tb.innerHTML = ''
-        users.forEach(users => {
+        users.forEach(user => {
             let tr = document.createElement('tr')
             tr.innerHTML =`
              <td>${user.firstname}</td>
@@ -26,9 +26,9 @@ function sendQuery(){
         });
         onDelete()
     }
-}
 
-frm.addEventListener('click',(e)=>{
+
+frm.addEventListener('submit',(e)=>{
   e.preventDefault()
   let user = {
     firstname:frm.firstname.value,
@@ -36,7 +36,7 @@ frm.addEventListener('click',(e)=>{
     age:frm.age.value,
     tel:frm.tel.value
   }
-  fetch('https://cybers.uz/api/dars',{
+  fetch('https://cyberss.uz/api/dars',{
     method:'POST',
     headers: {
         "Content-type":'application/json',
@@ -51,11 +51,10 @@ frm.addEventListener('click',(e)=>{
 
 function onDelete(){
    let btns = document.querySelectorAll('.delbtn')
-   console.log(btns);
+   
    btns.forEach(el=>{
      el.addEventListener('click',(e)=>{
-        console.log(e.target.dataset.id);
-          fetch('https://cybers.uz/api/dars/' + e.target.dataset.id,{
+          fetch('https://cyberss.uz/api/dars/' + e.target.dataset.id,{
             method:'DELETE'
           }).then(res=>{
             if(res.status === 200){
@@ -65,3 +64,6 @@ function onDelete(){
        })
    })
 }
+
+
+
